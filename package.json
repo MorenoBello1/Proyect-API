@@ -1,0 +1,24 @@
+{
+  "name": "proyect-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MorenoBello1/Proyect-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MorenoBello1/Proyect-API/issues"
+  },
+  "homepage": "https://github.com/MorenoBello1/Proyect-API#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
