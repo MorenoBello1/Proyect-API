@@ -1,11 +1,14 @@
 const express = require("express");
-
+const routing =  require("./routers/router")
 const app = express();
 const port = 3000;
 
-app.get("/", (req, res) => {
-  res.json({ message: "Hola Mundo" });
-});
+app.use('/',routing)
+
+//middleware si no encuentra ninguna ruta
+app.use((req,res)=>{
+  res.status(404).send('TOMA PICHAAA')
+})
 
 app.listen(port, () => {
   console.log(`API escuchando en http://localhost:${port}`);
