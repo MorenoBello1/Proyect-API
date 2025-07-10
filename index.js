@@ -1,8 +1,9 @@
 const express = require("express");
-const routing =  require("./routers/router")
+const routing =  require("./router")
 const app = express();
 const port = 3000;
 
+app.use(express.json())
 app.use('/',routing)
 
 //middleware si no encuentra ninguna ruta
