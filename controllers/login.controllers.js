@@ -9,5 +9,5 @@ exports.Login = (req, res) => {
     }
 
     let Token = Metodo.Gentoken(id,contrasena) //genera token
-    res.json({ Token }); 
+  res.json({ Token});
 };

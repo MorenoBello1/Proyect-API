@@ -6,8 +6,9 @@ const app = express();
 const port = 3000;
 app.use(cors()); 
 app.use(express.json())
-app.use('/',routing)
+app.use(cors()); 
 
+app.use('/',routing)
 //middleware si no encuentra ninguna ruta
 app.use((req,res)=>{
   res.status(404).send('TOMA PICHAAA')
