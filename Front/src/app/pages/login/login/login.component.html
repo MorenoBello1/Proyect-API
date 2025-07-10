@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+
+  <div class="row justify-content-center justify">
+    <div class="card " style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title " style="text-align: center; color: blue;">Login</h5>
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Email y/o Usuario</label>
+            <input type="text" class="form-control" [(ngModel)]="login.id" placeholder="Escriba su usuario">
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Contraseña</label>
+            <input type="password" class="form-control"  [(ngModel)]="login.contrasena"  placeholder="Ingrese su contraseña">
+          </div>
+        </div>
+        <div class="row">
+          <button type="button" class="btn btn-primary" (click)="Login()">Iniciar Sesión</button>
+
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
