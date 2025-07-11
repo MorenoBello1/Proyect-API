@@ -1,6 +1,7 @@
 const express = require("express");
 const routing =  require("./router")
 const cors = require('cors');
+const conexion = require("./db/db")
 
 const app = express();
 const port = 3000;
@@ -13,7 +14,6 @@ app.use('/',routing)
 app.use((req,res)=>{
   res.status(404).send('TOMA PICHAAA')
 })
-
 app.listen(port, () => {
   console.log(`API escuchando en http://localhost:${port}`);
 });
