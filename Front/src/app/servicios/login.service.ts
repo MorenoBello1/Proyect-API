@@ -11,4 +11,7 @@ export class LoginService {
   LoginToken(data: any) {
     return this.Http.post(`${this.baseUrl}`,data);
   }
+  usertest(){
+    return this.Http.get(environment.apiUrl+'/users')
+  }
 }

@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { LoginService } from '../../../servicios/login.service';
 import { login } from '../../../interface/interface';
 import { FormsModule } from '@angular/forms';
+import { TokenService } from '../../../servicios/token.service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class LoginComponent implements OnInit{
   private ServicieLogin = inject(LoginService);
+  private Token = inject(TokenService)
   login!:login 
   async ngOnInit() {
     this.login = new login()
@@ -25,7 +27,14 @@ export class LoginComponent implements OnInit{
       return;
     }
     this.ServicieLogin.LoginToken(this.login).subscribe(obtenido => {
-      console.log(obtenido, 'esto se obtuvo');
+      console.log((<any>obtenido).Token)
+      this.Token.setTokenLocalStorage((<any>obtenido).Token)
     })
-    }
+  }
+
+  async test(){
+    await this.ServicieLogin.usertest().subscribe(x=>{
+      console.log(x,'dataa')
+    })
+  }
 }

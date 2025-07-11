@@ -5,7 +5,7 @@
     <div class="card " style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title " style="text-align: center; color: blue;">Login</h5>
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12">
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">Email y/o Usuario</label>
             <input type="text" class="form-control" [(ngModel)]="login.id" placeholder="Escriba su usuario">
@@ -17,7 +17,7 @@
         </div>
         <div class="row">
           <button type="button" class="btn btn-primary" (click)="Login()">Iniciar Sesión</button>
-
+          <p class="text-center " style="color: blue; " (click)="test()">Registrar nueva cuenta </p>
         </div>
       </div>
     </div>
