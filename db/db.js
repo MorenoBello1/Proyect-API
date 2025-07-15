@@ -1,4 +1,3 @@
-//hola soy sexo en db mysql? o maria madre de dios ruega por nosotroslos..
 const mysql = require("mysql2");
 
 let conexion = mysql.createConnection({
