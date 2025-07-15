@@ -1,0 +1,10 @@
+.nav-link.active {
+  background-color: #fd150d75; /* azul Bootstrap */
+  color: white !important;
+  font-weight: bold;
+}
+.imgsalir {
+  width: 20px;
+  max-width: 100%;
+  height: auto;
+}

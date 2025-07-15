@@ -6,7 +6,7 @@ import { TokenService } from './token.service';
 
 export const AuthInterceptor = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
   const tokenService = inject(TokenService);
-  const token = tokenService.getTokenLocalStorage();
+  const token = tokenService.getTokenLocalStorage() || null;
 
   if (token) {
     const authReq = req.clone({

@@ -9,3 +9,36 @@ export class login{
         this.id = null
     }
 }
+
+export class vistaActual{
+    id:number
+    idusuario:number
+    constructor(){
+        this.id = 0
+        this.idusuario = 0
+    }
+}
+export class Vista {
+  id: number;
+  url: string;
+  nombre: string;
+  icono: string;
+  submenus?: Vista[];
+
+  constructor() {
+    this.id = 0;
+    this.url = '';
+    this.nombre = '';
+    this.icono = '';
+    this.submenus = [];
+  }
+}
+export class Menu {
+  idusuario: number;
+  idvista: number;
+
+  constructor() {
+    this.idusuario = 0;
+    this.idvista = 0;
+  }
+}
