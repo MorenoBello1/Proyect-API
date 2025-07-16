@@ -25,11 +25,13 @@ DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
   `idusuario` int NOT NULL,
   `idvista` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
   KEY `idusuario` (`idusuario`),
   KEY `idvista` (`idvista`),
   CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `users` (`id`),
   CONSTRAINT `menu_ibfk_2` FOREIGN KEY (`idvista`) REFERENCES `vistas` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +40,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (2,1),(2,1),(2,1),(2,1),(2,1),(1,2),(1,3),(2,1);
+INSERT INTO `menu` VALUES (2,2,6),(2,3,7),(2,1,8),(1,2,9),(2,4,10);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,8 +137,11 @@ CREATE TABLE `vistas` (
   `url` varchar(100) DEFAULT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `icono` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `idpadre` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_padre_id` (`idpadre`),
+  CONSTRAINT `fk_padre_id` FOREIGN KEY (`idpadre`) REFERENCES `vistas` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +150,7 @@ CREATE TABLE `vistas` (
 
 LOCK TABLES `vistas` WRITE;
 /*!40000 ALTER TABLE `vistas` DISABLE KEYS */;
-INSERT INTO `vistas` VALUES (1,'/home','Dashboard',''),(2,'/registro','Registros',''),(3,'/home','Home','');
+INSERT INTO `vistas` VALUES (1,'/home','Dashboard','',NULL),(2,'/registro','Registros','',NULL),(3,'/home','Home','',NULL),(4,'/roles','Roles','x',3),(5,'/roles','Roles','x',3);
 /*!40000 ALTER TABLE `vistas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -158,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-15 19:01:36
+-- Dump completed on 2025-07-15 21:33:21
