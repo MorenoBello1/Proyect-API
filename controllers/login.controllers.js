@@ -8,7 +8,10 @@ exports.Login = (req, res) => {
     return;
   } else {
     // conexion.query(`select * from users where usuario = '${id}' and contrasena ='${contrasena}'`, (err, result) =>{
-    const query = "SELECT * FROM users WHERE usuario = ? AND contrasena = ?"; //segun gpt de esta manera evita sqlInjection , sirve para buena practica
+    const query =  `SELECT u.id,u.usuario,rol.nombre_rol as rol, rol.id as idrol
+                    FROM users as u 
+                    INNER JOIN rol  ON rol.id = u.idrol 
+                    WHERE usuario = ? AND contrasena = ?`
     consulta.query(query, [id, contrasena], (err, result) => {
       if (err) return console.log(err, "error");
 
@@ -17,7 +20,7 @@ exports.Login = (req, res) => {
       } else {
         console.log(result[0]);
         let Token = Metodo.Gentoken(id, contrasena); //genera token
-        res.json({ Token });
+        res.json({ Token:Token, user:result[0]});
       }
     });
   }

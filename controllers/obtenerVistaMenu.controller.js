@@ -2,21 +2,21 @@ const Metodo = require("../function/fuction");
 const consulta = require("../db/db");
 
 exports.vistaobt = (req, res) => {
-  const { idusuario } = req.body;
-
-  if (!idusuario) {
+  const { idrol } = req.body;
+  console.log(req.body,'recibd')
+  if (!idrol) {
     res.status(404).send("Campos en el Body no fue enviado");
     return;
   } else {
     const query =
-    `SELECT  u.usuario as usuario, vi.url as url, vi.nombre, vi.idpadre, me.idvista
-        FROM menu as me
-        INNER JOIN users as u ON u.id = me.idusuario
-        INNER JOIN vistas as vi ON vi.id = me.idvista
-        where u.id = ?`;
+    `SELECT r.nombre_rol as rol, vi.url as url, vi.nombre, vi.idpadre, m.idvista
+        FROM MENU AS m
+        INNER JOIN ROL AS r ON r.id = m.idrol
+        INNER JOIN VISTAS AS vi ON vi.id = m.idvista
+        where r.id = ?`;
     consulta.query(
       query,
-      [idusuario],
+      [idrol],
       (err, result) => {
         if (err) {
           console.log(err);

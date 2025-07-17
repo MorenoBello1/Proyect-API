@@ -23,13 +23,13 @@ DROP TABLE IF EXISTS `menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `menu` (
-  `idusuario` int NOT NULL,
   `idvista` int NOT NULL,
   `id` int NOT NULL AUTO_INCREMENT,
+  `idrol` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idusuario` (`idusuario`),
   KEY `idvista` (`idvista`),
-  CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `users` (`id`),
+  KEY `fk_menu_rol` (`idrol`),
+  CONSTRAINT `fk_menu_rol` FOREIGN KEY (`idrol`) REFERENCES `rol` (`id`),
   CONSTRAINT `menu_ibfk_2` FOREIGN KEY (`idvista`) REFERENCES `vistas` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -40,7 +40,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (2,2,6),(2,3,7),(2,1,8),(1,2,9),(2,4,10);
+INSERT INTO `menu` VALUES (2,6,1),(3,7,1),(1,8,1),(2,9,NULL),(4,10,1);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,10 +52,10 @@ DROP TABLE IF EXISTS `rol`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rol` (
-  `ID_ROL` int NOT NULL AUTO_INCREMENT,
-  `NOMBRE_ROL` varchar(20) NOT NULL,
-  PRIMARY KEY (`ID_ROL`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int NOT NULL,
+  `nombre_rol` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,11 +80,11 @@ CREATE TABLE `users` (
   `fecha_creacion` datetime DEFAULT CURRENT_TIMESTAMP,
   `usuario` varchar(100) NOT NULL,
   `contrasena` varchar(50) NOT NULL,
-  `ID_ROL` int NOT NULL DEFAULT '1',
+  `idrol` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `ID_ROL` (`ID_ROL`),
-  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`ID_ROL`) REFERENCES `rol` (`ID_ROL`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `ID_ROL` (`idrol`),
+  CONSTRAINT `fk_users_id` FOREIGN KEY (`idrol`) REFERENCES `rol` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'2025-07-15 15:27:59','test','2',1),(2,'2025-07-15 15:28:26','demo','1234',1),(3,'2025-07-15 16:22:25','lenny','jajasalu2',1),(4,'2025-07-15 16:45:27','ariel','kotlin',1);
+INSERT INTO `users` VALUES (1,'2025-07-15 15:27:59','test','2',1),(2,'2025-07-15 15:28:26','demo','1234',1),(3,'2025-07-15 16:22:25','lenny','jajasalu2',1),(4,'2025-07-15 16:45:27','ariel','kotlin',1),(5,'2025-07-17 15:33:44','test','1234',NULL),(6,'2025-07-17 15:38:55','MORENO','1234',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `vistas` (
 
 LOCK TABLES `vistas` WRITE;
 /*!40000 ALTER TABLE `vistas` DISABLE KEYS */;
-INSERT INTO `vistas` VALUES (1,'/home','Dashboard','',NULL),(2,'/registro','Registros','',NULL),(3,'/home','Home','',NULL),(4,'/roles','Roles','x',3),(5,'/roles','Roles','x',3);
+INSERT INTO `vistas` VALUES (1,'/home','Dashboard','',NULL),(2,'/registro','Registros','',NULL),(3,'/contenido','Contenido','',NULL),(4,'/sexo','otros','x',3),(5,'/roles','Roles','x',3);
 /*!40000 ALTER TABLE `vistas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -163,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-15 21:33:21
+-- Dump completed on 2025-07-17 17:20:27
