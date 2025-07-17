@@ -1,6 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TokenService } from '../../servicios/token.service';
+import { RaizComponent } from '../../pages/raiz/raiz.component';
+import { LoginService } from '../../servicios/login.service';
+declare var bootstrap: any;  // para acceder a Bootstrap JS global
 
 @Component({
   selector: 'app-main-layout',
@@ -9,30 +12,36 @@ import { TokenService } from '../../servicios/token.service';
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.css'
 })
-export class MainLayoutComponent implements OnInit{
+export class MainLayoutComponent extends RaizComponent implements OnInit{
   private Token = inject(TokenService)
-  private Router_ = inject(Router)
+  private ServicieLogin = inject(LoginService);
   listMenu:any[]=[]
-  
-  ngOnInit(): void {
-    this.listMenu = [// solo un ejemplo de lo que espero del backend temp
-    { id: 1, url: 'home', nombre: 'Home', icono: '', listmenu: [
-        { id: 4, url: '3', nombre: 'Sub Home', icono: '', listmenu: [] },
-        { id: 5, url: '12', nombre: 'Sub Registro', icono: '', listmenu: [] }
-      ] 
-    },
-    { id: 2, url: '#3', nombre: 'Registros', icono: '', listmenu: [] },
-    {id: 3, url: '#22', nombre: 'Seleccion', icono: '', listmenu: [
-        { id: 4, url: '213', nombre: 'Sub Home', icono: '', listmenu: [] },
-        { id: 5, url: '12', nombre: 'Sub Registro', icono: '', listmenu: [] }
-      ]
-    },
-    { id: 6, url: 'xx', nombre: 'XXX', icono: '', listmenu: [] }
-  ];
+  user:any
+  modal:any
+  async ngOnInit() {
+    
+  const userString = localStorage.getItem('user');
+    if (!userString) return;
+
+    const user = JSON.parse(userString);
+    this.user = user;
+    this.ServicieLogin.ObtenerVistas(user).subscribe((res: any) => {
+      this.listMenu = res;
+      console.log('Vistas cargadas:', this.listMenu);
+    });   
+    const modalElement = document.getElementById('staticBackdrop');
+    this.modal = new bootstrap.Modal(modalElement, {
+     
+    });
   }
 
   CerrarSesion(){
     this.Token.clear()
     this.Router_.navigate(['/login'])
   }
+  Modal(){
+    this.modal.show();
+  }
+  
+
 }

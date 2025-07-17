@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginService {
   private baseUrl = environment.apiUrl+'/login';
+  private baseUrlvista = environment.apiUrl+'/obtenvista';
+
   constructor(private Http : HttpClient) { }
 
   LoginToken(data: any) {
@@ -13,5 +15,8 @@ export class LoginService {
   }
   usertest(){
     return this.Http.get(environment.apiUrl+'/users')
+  }
+  ObtenerVistas(idusuario:number){
+    return this.Http.post(this.baseUrlvista,idusuario)
   }
 }

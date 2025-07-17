@@ -19,11 +19,21 @@ export class LoginComponent extends RaizComponent implements OnInit{
   private Token = inject(TokenService)
   login!:login 
 
+  private keydownHandler = (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      console.log('Enter presionado');
+      this.Login(); // ahora sí tiene acceso a this
+    }
+  };
   async ngOnInit() {
     this.login = new login()
+    document.addEventListener('keydown', this.keydownHandler);
+
     console.log('hola')
   }
-
+  ngOnDestroy() {
+    document.removeEventListener('keydown', this.keydownHandler);
+  }
   
   async Login(){
     if(!this.login.contrasena || !this.login.id){
@@ -31,11 +41,18 @@ export class LoginComponent extends RaizComponent implements OnInit{
       return;
     }
     this.ServicieLogin.LoginToken(this.login).subscribe(obtenido => {
-      console.log((<any>obtenido).Token)
-      this.Token.setTokenLocalStorage((<any>obtenido).Token)
+      console.log((<any>obtenido))
+      this.Token.setTokenLocalStorage((<any>obtenido).Token);
+     
+      this.setLocalStorage('user',JSON.stringify((<any>obtenido).user))
       this.Router_.navigate(['/home'])
     })
   }
+
+ 
+
+
+  
 
 
 }
