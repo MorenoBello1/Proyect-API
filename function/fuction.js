@@ -35,8 +35,21 @@ class base{
          return res.status(403).json({ error: "Token inválido o expirado" });
       }
    };
-}
+   ConsultarExistencia(conectiondb, Objects) {
+   const query = `SELECT * FROM ${Objects.tabla} WHERE ${Objects.keys}`;
 
+   return new Promise((resolve, reject) => {
+      conectiondb.query(query, (err, result) => {
+         if (err) {
+         console.error(err, "error");
+         return reject(err);
+         }
+         resolve(result.length > 0);
+      });   
+   });
+   }
+
+}
 
 // const Gentoken = (id,name)=>{
 //  let token = jwt.sign({
