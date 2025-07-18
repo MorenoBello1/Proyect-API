@@ -27,11 +27,11 @@ CREATE TABLE `menu` (
   `id` int NOT NULL AUTO_INCREMENT,
   `idrol` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idvista` (`idvista`),
   KEY `fk_menu_rol` (`idrol`),
+  KEY `fk_menu_vista` (`idvista`),
   CONSTRAINT `fk_menu_rol` FOREIGN KEY (`idrol`) REFERENCES `rol` (`id`),
-  CONSTRAINT `menu_ibfk_2` FOREIGN KEY (`idvista`) REFERENCES `vistas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_menu_vista` FOREIGN KEY (`idvista`) REFERENCES `vistas` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,10 +52,10 @@ DROP TABLE IF EXISTS `rol`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rol` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nombre_rol` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `rol` (
 
 LOCK TABLES `rol` WRITE;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
-INSERT INTO `rol` VALUES (1,'ADMIN');
+INSERT INTO `rol` VALUES (1,'ADMIN'),(2,'defecto');
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,9 +82,8 @@ CREATE TABLE `users` (
   `contrasena` varchar(50) NOT NULL,
   `idrol` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `ID_ROL` (`idrol`),
-  CONSTRAINT `fk_users_id` FOREIGN KEY (`idrol`) REFERENCES `rol` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `ID_ROL` (`idrol`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +92,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'2025-07-15 15:27:59','test','2',1),(2,'2025-07-15 15:28:26','demo','1234',1),(3,'2025-07-15 16:22:25','lenny','jajasalu2',1),(4,'2025-07-15 16:45:27','ariel','kotlin',1),(5,'2025-07-17 15:33:44','test','1234',NULL),(6,'2025-07-17 15:38:55','MORENO','1234',1);
+INSERT INTO `users` VALUES (1,'2025-07-15 15:27:59','test','2',1),(2,'2025-07-15 15:28:26','demo','1234',1),(3,'2025-07-15 16:22:25','lenny','jajasalu2',1),(4,'2025-07-15 16:45:27','ariel','kotlin',1),(5,'2025-07-17 15:33:44','test','1234',2),(13,'2025-07-17 22:17:50','jean','1234',2),(14,'2025-07-18 10:37:54','jean','1234',NULL),(15,'2025-07-18 11:03:52','demo','1234',1),(16,'2025-07-18 11:04:08','demo','1234',2),(17,'2025-07-18 11:37:33','12321','1234',2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-17 17:20:27
+-- Dump completed on 2025-07-18 11:38:21

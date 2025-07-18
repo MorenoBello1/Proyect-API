@@ -1,7 +1,7 @@
 const consulta = require("../db/db");
 const Metodo = require("../function/fuction");
 
-exports.Register =  (req, res) => {
+exports.Register = async  (req, res) => {
   const { usuario, contrasenia, idrol} = req.body;
   if (!usuario || !contrasenia) {
     res.status(404).send("Campos en el Body no fueron enviados");
@@ -12,7 +12,7 @@ exports.Register =  (req, res) => {
       tabla: 'users',
       keys: `usuario = '${usuario}'`
     } 
-    if(Metodo.ConsultarExistencia(consulta,objeto)){
+    if(await Metodo.ConsultarExistencia(consulta,objeto)){
       res.status(409).json({ mensaje: `El usuario ${usuario} ya existe` });
       return
     }
