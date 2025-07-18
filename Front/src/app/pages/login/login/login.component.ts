@@ -40,6 +40,7 @@ export class LoginComponent extends RaizComponent implements OnInit{
       console.log('Faltan datos')
       return;
     }
+    this.login.id = this.login.id.trim()
     this.ServicieLogin.LoginToken(this.login).subscribe(obtenido => {
       console.log((<any>obtenido))
       this.Token.setTokenLocalStorage((<any>obtenido).Token);
@@ -47,6 +48,9 @@ export class LoginComponent extends RaizComponent implements OnInit{
       this.setLocalStorage('user',JSON.stringify((<any>obtenido).user))
       this.Router_.navigate(['/home'])
     })
+  }
+  Registro(){
+    this.Router_.navigate(['/registro'])
   }
 
  

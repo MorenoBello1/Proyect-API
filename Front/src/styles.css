@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+.fondo {
+  background-image: url("/img/fondologint.jpg");
+  color: white; /* si quieres texto blanco */
+   background-size: cover;          /* Ajusta el tamaño para cubrir */
+  background-position: center;     /* Centra la imagen */
+  background-repeat: no-repeat;    /* No repite la imagen */
+  min-height: 100vh;               /* Toma toda la altura de la pantalla */
+  background-attachment: fixed;    
+}

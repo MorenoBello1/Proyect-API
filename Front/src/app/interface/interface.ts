@@ -9,6 +9,18 @@ export class login{
         this.id = null
     }
 }
+export class Usuario {
+  fecha:string
+  contrasenia:string
+  usuario:string
+  idrol:number
+  constructor(){
+    this.fecha = new Date().toISOString()
+    this.contrasenia = ''
+    this.usuario = ''
+    this.idrol = 2
+  }
+}
 
 export class vistaActual{
     id:number

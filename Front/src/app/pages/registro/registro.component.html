@@ -1,1 +1,38 @@
-<p>registro works!</p>
+
+<div class="fondo ">
+  <div class="container" >
+      <div class="d-flex justify-content-center align-items-center" style="height: 80vh; ">
+          <div class="row justify-content-center justify" style="width: 50%;">
+              <div class="card " >
+                  <div class="card-body">
+                     <i class="bi bi-arrow-left-circle-fill text-dark" (click)="Volver()"></i>
+                      <h5 class="card-title " style="text-align: center; color: rgb(14, 0, 212);">Nueva Cuenta</h5>
+                      <div class="input-group flex-nowrap mt-3"> 
+                          <span class="input-group-text" id="addon-wrapping">
+                              <i class="bi bi-person"></i>
+                          </span>
+                          <input type="text" class="form-control" [(ngModel)]="oUsuario.usuario" autocomplete="off" placeholder="Correo/Usuario"  aria-describedby="addon-wrapping">
+                      </div>
+                       <div class="input-group flex-nowrap mt-3"> 
+                          <span class="input-group-text" id="addon-wrapping">
+                              <i   [ngClass]="{'bi-eye ': !visiblecontra, 'bi-eye-slash text-success': visiblecontra}"  (click)="visiblecontra==true ? visiblecontra=false: visiblecontra = true"></i>
+                          </span>
+                              <input   [type]="visiblecontra ? 'text' : 'password'" class="form-control" autocomplete="off"  [(ngModel)]="oUsuario.contrasenia" placeholder="Contraseña"  aria-describedby="addon-wrapping"> 
+                      </div>
+                     
+                      <label class=" mt-3 ">
+                          <b>Seleccione un tipo de Rol</b>
+                      </label>
+                      <select class="form-select  mt-2  col-10"  [(ngModel)]="oUsuario.idrol">
+                          <option [value]="1">Admin</option>
+                          <option [value]="2">Defecto</option>
+                      </select>
+                      <div class="row mb-3 mt-3">
+                          <button type="button" class="btn btn-primary" (click)="Registrar()" >Registrar</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
