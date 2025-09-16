@@ -1,8 +1,7 @@
 //user controladores
 exports.getAllUsers = (req, res) => {
-  
-  res.send('Lista de usuarios');
+  res.json({mensaje:'Lista de usuarios'});
 };
 exports.Post = (req, res) => {
-  res.send('Lista de usuarios222');
+  res.json({mensaje:'Lista de usuarios22'});
 };
